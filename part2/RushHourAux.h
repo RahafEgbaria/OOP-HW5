@@ -1,6 +1,7 @@
 #ifndef PART2_RUSHHOUR_AUX_H
 #define PART2_RUSHHOUR_AUX_H
 
+// #include "Printer.h"
 #include "MoveVehicle.h"
 #include "List.h"
 #include "Direction.h"
@@ -8,6 +9,8 @@
 #include "GameBoard.h"
 #include "CellType.h"
 #include "BoardCell.h"
+
+using namespace std;
 
 /********************** FindCar begin **********************/
 // gets board, row, col, and car type
@@ -48,10 +51,16 @@ struct CheckIfCanExit
     typedef typename GetAtIndex<C, typename GetAtIndex<R, typename B::board>::value>::value curr_cell;
 
     // check
-    typedef typename NestedConditional<(curr_cell::type == X || curr_cell::type == EMPTY) && ((B::width - 1) - C > 0),
+    /*typedef typename NestedConditional<(curr_cell::type == X || curr_cell::type == EMPTY) && ((B::width - 1) - C > 0),
                                        CheckIfCanExit<B, R, C + 1>,
                                        NestedConditional<((B::width - 1) - C == 0),
                                                          NestedConditionalValueWrapper<NestedConditionalBoolWrapper<true>>,
+                                                         NestedConditionalValueWrapper<NestedConditionalBoolWrapper<false>>>>::value value;*/
+
+    typedef typename NestedConditional<((B::width - 1) - C == 0) && (curr_cell::type == X || curr_cell::type == EMPTY),
+                                       NestedConditionalValueWrapper<NestedConditionalBoolWrapper<true>>,
+                                       NestedConditional<(curr_cell::type == X || curr_cell::type == EMPTY),
+                                                         CheckIfCanExit<B, R, C + 1>,
                                                          NestedConditionalValueWrapper<NestedConditionalBoolWrapper<false>>>>::value value;
 };
 /********************** CheckIfCanExit end **********************/

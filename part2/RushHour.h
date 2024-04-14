@@ -15,7 +15,6 @@ struct CheckWin
 
     // check if it can exit the grid
     static constexpr bool result = CheckIfCanExit<B, location::row, location::col>::value::result;
-    // static constexpr bool result = CheckIfCanExit<B, location::row, location::col, (B::width - 1) - C>::value;
 };
 /********************** CheckWin end **********************/
 /********************** CheckSolution begin **********************/

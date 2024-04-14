@@ -30,13 +30,14 @@ struct PrependList<T, List<TT...>>
 };
 /********************** PrependList end **********************/
 /********************** GetAtIndex begin **********************/
-template<int N, typename T>
-struct GetAtIndex{};
+template <int N, typename T>
+struct GetAtIndex
+{
+};
 
 template <int N, typename T, typename... TT>
 struct GetAtIndex<N, List<T, TT...>>
 {
-    static_assert(N > 0, "GetAtIndex recived N that is not positive!");
     typedef typename GetAtIndex<N - 1, typename List<T, TT...>::next>::value value;
 };
 
